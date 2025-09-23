@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Date and Channel in Title
 // @namespace    http://tampermonkey.net/
-// @version      v1.1
+// @version      v1.2
 // @description  Adds Date and Channel to the tab's title
 // @author       Adowrath
-// @match        https://www.youtube.com/watch*
+// @match        https://www.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @downloadURL  https://github.com/Adowrath/Useful-Misc/raw/main/YT-Date-Channel-Title.user.js
 // @grant        none
