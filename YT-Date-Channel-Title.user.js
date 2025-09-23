@@ -15,6 +15,7 @@
 
     function findTitle() {
         let videoObject = document.querySelector(`div[itemtype="http://schema.org/VideoObject"]`);
+        if(videoObject === null) return "";
 
         let datePublished = videoObject.querySelector(`[itemprop="datePublished"]`).content;
         let uploadDate = videoObject.querySelector(`[itemprop="uploadDate"]`).content;
@@ -31,6 +32,7 @@
 
     await sleep(1000 * 3);
     while(true) {
+        await sleep(100);
         let loc = location.href;
 
         if(location.pathname !== "/watch") {
@@ -40,6 +42,7 @@
         let title;
         try {
             title = findTitle();
+            if(title === "") continue;
         } catch(e) {
             console.error(e);
             alert("Error!");
