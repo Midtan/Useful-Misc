@@ -29,29 +29,26 @@
 
     const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-    async function fillTitle() {
-        while(true) {
-            let loc = location.href;
+    await sleep(1000 * 3);
+    while(true) {
+        let loc = location.href;
 
-            if(location.pathname !== "/watch") {
-                await sleep(5000);
-                continue;
-            }
-            let title;
-            try {
-                title = findTitle();
-            } catch(e) {
-                console.error(e);
-                alert("Error!");
-                return;
-            }
-            while(true) {
-                if(location.href !== loc) break;
-                if(document.title !== title) document.title = title;
-                await sleep(100);
-            }
+        if(location.pathname !== "/watch") {
+            await sleep(1000 * 5);
+            continue;
+        }
+        let title;
+        try {
+            title = findTitle();
+        } catch(e) {
+            console.error(e);
+            alert("Error!");
+            continue;
+        }
+        while(true) {
+            if(location.href !== loc) break;
+            if(document.title !== title) document.title = title;
+            await sleep(100);
         }
     }
-
-    window.addEventListener("yt-navigate-finish", fillTitle);
 })();
