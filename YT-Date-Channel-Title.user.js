@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Date and Channel in Title
 // @namespace    http://tampermonkey.net/
-// @version      v1.0
+// @version      v1.1
 // @description  Adds Date and Channel to the tab's title
 // @author       Adowrath
 // @match        https://www.youtube.com/watch*
@@ -30,20 +30,26 @@
     const sleep = ms => new Promise(r => setTimeout(r, ms));
 
     async function fillTitle() {
-        let loc = location.href;
-
-        let title;
-        try {
-            title = findTitle();
-        } catch(e) {
-            console.error(e);
-            alert("Error!");
-            return;
-        }
         while(true) {
-            if(location.href !== loc) return;
-            if(document.title !== title) document.title = title;
-            await sleep(100);
+            let loc = location.href;
+
+            if(location.pathname !== "/watch") {
+                await sleep(5000);
+                continue;
+            }
+            let title;
+            try {
+                title = findTitle();
+            } catch(e) {
+                console.error(e);
+                alert("Error!");
+                return;
+            }
+            while(true) {
+                if(location.href !== loc) break;
+                if(document.title !== title) document.title = title;
+                await sleep(100);
+            }
         }
     }
 
